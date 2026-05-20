@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Alunos{% endblock %}
+
+{% block content %}
+<section class="page-title">
+  <div>
+    <p class="eyebrow">Cadastro</p>
+    <h1>Alunos</h1>
+  </div>
+</section>
+
+<section class="grid">
+  <form class="panel form-panel" method="post">
+    <h2>Novo aluno</h2>
+    <label>Nome<input name="nome" required minlength="2"></label>
+    <label>CPF<input name="cpf" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"></label>
+    <label>Matricula<input name="matricula" required></label>
+    <label>Curso<input name="curso" required></label>
+    <button type="submit">Cadastrar aluno</button>
+  </form>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2>Alunos cadastrados</h2>
+      <form class="search-form" method="get">
+        <input
+          name="pesquisa"
+          placeholder="Pesquisar por nome"
+          value="{{ pesquisa }}"
+        >
+        <button type="submit">Pesquisar</button>
+        {% if pesquisa %}
+          <a class="ghost-link" href="{{ url_for('alunos') }}">Limpar</a>
+        {% endif %}
+      </form>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Matricula</th>
+            <th>Curso</th>
+            <th>Disciplinas</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for aluno in alunos %}
+            <tr>
+              <td>{{ aluno.nome }}</td>
+              <td>{{ aluno.cpf }}</td>
+              <td>{{ aluno.matricula }}</td>
+              <td>{{ aluno.curso }}</td>
+              <td>{{ aluno.disciplinas or 'Nenhuma disciplina matriculada.' }}</td>
+              <td><a class="ghost-link" href="{{ url_for('editar_aluno', aluno_id=aluno.id) }}">Editar</a></td>
+            </tr>
+          {% else %}
+            <tr><td colspan="6" class="empty">Nenhum aluno cadastrado.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
