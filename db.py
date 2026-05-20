@@ -7,6 +7,31 @@ from mysql.connector import Error as MySQLError
 from mysql.connector import IntegrityError as MySQLIntegrityError
 
 
+def _env_bool(name):
+    return os.getenv(name, "").lower() in {"1", "true", "yes"}
+
+
+MYSQL_REQUIRED = _env_bool("MYSQL_REQUIRED")
+
+if MYSQL_REQUIRED:
+    missing = [
+        name
+        for name in (
+            "MYSQL_HOST",
+            "MYSQL_PORT",
+            "MYSQL_USER",
+            "MYSQL_PASSWORD",
+            "MYSQL_DATABASE",
+        )
+        if not os.getenv(name)
+    ]
+    if missing:
+        raise RuntimeError(
+            "Variaveis de ambiente obrigatorias ausentes: "
+            + ", ".join(missing)
+        )
+
+
 DB_CONFIG = {
     "host": os.getenv("MYSQL_HOST", "localhost"),
     "port": int(os.getenv("MYSQL_PORT", "3306")),
@@ -16,7 +41,6 @@ DB_CONFIG = {
 }
 
 SQLITE_PATH = os.getenv("SQLITE_PATH", "sistema_academico.sqlite3")
-MYSQL_REQUIRED = os.getenv("MYSQL_REQUIRED", "").lower() in {"1", "true", "yes"}
 
 IntegrityError = (MySQLIntegrityError, sqlite3.IntegrityError)
 _engine = None
@@ -75,6 +99,8 @@ def _ensure_sqlite_schema(connection):
           cpf TEXT NOT NULL UNIQUE,
           matricula TEXT NOT NULL UNIQUE,
           curso TEXT NOT NULL,
+          ativo INTEGER NOT NULL DEFAULT 1,
+          removido_em TEXT NULL,
           criado_em TEXT DEFAULT CURRENT_TIMESTAMP
         );
 
@@ -84,6 +110,8 @@ def _ensure_sqlite_schema(connection):
           cpf TEXT NOT NULL UNIQUE,
           registro TEXT NOT NULL UNIQUE,
           area TEXT NOT NULL,
+          ativo INTEGER NOT NULL DEFAULT 1,
+          removido_em TEXT NULL,
           criado_em TEXT DEFAULT CURRENT_TIMESTAMP
         );
 
@@ -93,6 +121,8 @@ def _ensure_sqlite_schema(connection):
           codigo TEXT NOT NULL UNIQUE,
           carga_horaria INTEGER NOT NULL,
           professor_id INTEGER NULL,
+          ativo INTEGER NOT NULL DEFAULT 1,
+          removido_em TEXT NULL,
           criado_em TEXT DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (professor_id) REFERENCES professores(id) ON DELETE SET NULL
         );
@@ -110,16 +140,17 @@ def _ensure_sqlite_schema(connection):
         );
         """
     )
-    columns = {
-        row["name"]
-        for row in connection.execute("PRAGMA table_info(matriculas)").fetchall()
-    }
-    if "ativo" not in columns:
-        connection.execute(
-            "ALTER TABLE matriculas ADD COLUMN ativo INTEGER NOT NULL DEFAULT 1"
-        )
-    if "removido_em" not in columns:
-        connection.execute("ALTER TABLE matriculas ADD COLUMN removido_em TEXT NULL")
+    for table_name in ("alunos", "professores", "disciplinas", "matriculas"):
+        columns = {
+            row["name"]
+            for row in connection.execute(f"PRAGMA table_info({table_name})").fetchall()
+        }
+        if "ativo" not in columns:
+            connection.execute(
+                f"ALTER TABLE {table_name} ADD COLUMN ativo INTEGER NOT NULL DEFAULT 1"
+            )
+        if "removido_em" not in columns:
+            connection.execute(f"ALTER TABLE {table_name} ADD COLUMN removido_em TEXT NULL")
 
     connection.execute(
         """

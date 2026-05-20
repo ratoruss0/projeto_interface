@@ -16,3 +16,6 @@ relatorio_academico.json
 relatorio_academico.pdf
 
 .env
+.test-data/
+.pytest_cache/
+pytest-cache-files-*/

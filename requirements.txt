@@ -1,3 +1,6 @@
 Flask==3.0.3
 mysql-connector-python==8.4.0
 gunicorn
+alembic
+SQLAlchemy
+pytest
