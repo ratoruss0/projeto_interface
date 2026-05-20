@@ -1,0 +1,223 @@
+DOCUMENTAÇÃO DE ATUALIZAÇÕES — SISTEMA ACADÊMICO
+
+Projeto: Sistema Acadêmico
+Professor: Felipe Douglas
+Aluno(a): Eduarda Zahara
+Data da documentação: 20/05/2026
+
+Histórico de Alterações e Melhorias Realizadas
+
+1. Configuração e execução inicial do Flask
+Data: 14/05/2026
+Horário: Aproximadamente 16h20
+
+Foi realizada a instalação e validação do ambiente Flask do projeto. Durante os testes foi confirmado que:
+
+O Flask já estava instalado no ambiente Python utilizado;
+Versão identificada: Flask 3.1.3;
+O pacote mysql-connector-python também estava instalado;
+O sistema respondeu corretamente ao acessar a rota principal.
+
+URL validada:
+
+http://127.0.0.1:5000/
+
+Também foi validado que:
+
+O sistema utiliza SQLite local automaticamente quando o MySQL não está configurado;
+A aplicação iniciou corretamente sem necessidade de configuração manual adicional do banco local.
+
+2. Atualização da branch principal e configuração do Flask
+Data: 20/05/2026
+Horário: 13h26
+
+Foram realizadas alterações relacionadas à organização do repositório e ambiente Flask:
+
+Alteração da branch principal de master para main;
+Ajustes relacionados ao modo debug do Flask;
+Preparação do ambiente para futuras publicações.
+
+Comando utilizado:
+
+git push -u origin main
+
+Observação:
+
+Foi identificada uma alteração pendente no arquivo buildspec.yml.
+
+3. Integração com RDS MySQL e sistema de migrations
+Data: 20/05/2026
+Horário: 13h37
+
+Foi preparada a estrutura do projeto para utilização de banco de dados MySQL via AWS RDS.
+
+Arquivos adicionados:
+- alembic.ini
+- migrations/env.py
+- migrations/script.py.mako
+- migrations/versions/0001_initial_schema.py
+- scripts/init_mysql.py
+- scripts/run_migrations.py
+
+Arquivos atualizados:
+- requirements.txt
+- buildspec.yml
+- README.md
+
+Melhorias implementadas:
+- Integração com Alembic e Flask-Migrate;
+- Scripts automáticos de inicialização do banco;
+- Controle de migrations;
+- Compatibilidade com RDS MySQL.
+
+Variáveis utilizadas:
+- MYSQL_HOST
+- MYSQL_PORT
+- MYSQL_USER
+- MYSQL_PASSWORD
+- MYSQL_DATABASE
+
+Comandos de inicialização:
+- python scripts/init_mysql.py
+- python scripts/run_migrations.py
+
+Validação realizada
+
+Foi executado:
+
+python -m py_compile app.py db.py relatorios.py Sistema_academico.py application.py scripts/init_mysql.py scripts/run_migrations.py migrations/env.py migrations/versions/0001_initial_schema.py
+
+Resultado:
+
+Sem erros de compilação.
+
+4. Implementação de testes automatizados
+Data: 20/05/2026
+Horário: 14h32
+
+Foi implementada estrutura de testes automatizados utilizando pytest.
+
+Arquivos criados:
+- pytest.ini
+- tests/conftest.py
+- tests/test_models.py
+- tests/test_routes.py
+
+Cobertura de testes:
+- Testes unitários
+- Aluno;
+- Professor;
+- Disciplina;
+- SistemaAcademico.
+
+Testes de integração:
+- Dashboard;
+- Cadastro de aluno;
+- Validação de CPF inválido;
+- Cadastro de professor;
+- Cadastro de disciplina;
+- Matrículas;
+- Bloqueio de matrícula duplicada;
+- Relatórios JSON e PDF.
+- Integração com CodeBuild
+
+O arquivo buildspec.yml foi atualizado para executar:
+
+- flake8
+- py_compile
+- python -m pytest
+
+Resultado dos testes:
+passed
+
+5. Exclusão lógica e endpoints de edição
+Data: 20/05/2026
+Horário: 16h36
+
+Foi implementado sistema de exclusão lógica para:
+
+- alunos;
+- professores;
+- disciplinas.
+
+Campos adicionados:
+- ativo
+- removido_em
+- Migration adicionada
+- 0002_soft_delete_core_tables.py
+
+Melhorias implementadas:
+- Listagens filtrando apenas registros ativos;
+- Desativação automática de matrículas relacionadas;
+- Botões “Remover” nas telas do sistema;
+- Endpoints PUT/PATCH para edição de registros.
+- Endpoints adicionados
+- PUT/PATCH /alunos/<id>
+- PUT/PATCH /professores/<id>
+- PUT/PATCH /disciplinas/<id>
+
+Validação executada:
+python -m flake8 ... --jobs=1
+python -m pytest
+
+Resultado:
+passed
+
+6. Segurança e variáveis sensíveis
+Data: 20/05/2026
+Horário: 17h15
+
+Foram realizadas melhorias de segurança para ambiente de produção.
+
+Alterações implementadas:
+- FLASK_SECRET_KEY passou a ser obrigatória;
+- O sistema não inicia sem chave secreta definida;
+- db.py valida variáveis obrigatórias quando:
+- MYSQL_REQUIRED=1
+
+Arquivos adicionados/alterados:
+- .env.example
+- README.md
+- app.py
+- db.py
+
+Melhorias de segurança:
+- Recomendação de uso do AWS Secrets Manager;
+- Separação de credenciais do código-fonte;
+- Desativação do modo debug em produção.
+
+Variáveis recomendadas
+- FLASK_DEBUG=0
+- MYSQL_REQUIRED=1
+- FLASK_SECRET_KEY
+
+Comando recomendado para geração da chave:
+python -c "import secrets; print(secrets.token_hex(32))"
+
+Validações executadas
+- python -m pytest
+- python -m py_compile ...
+- python -m flake8 ... --jobs=1
+
+Resultado:
+passed, sem erros de compilação ou lint.
+
+CONSIDERAÇÕES FINAIS:
+
+As alterações realizadas melhoraram:
+
+segurança do sistema;
+organização do projeto;
+integração com banco MySQL/RDS;
+controle de migrations;
+cobertura de testes automatizados;
+suporte a exclusão lógica;
+estabilidade do ambiente Flask.
+
+O sistema encontra-se mais preparado para:
+
+homologação;
+deploy;
+ambiente de produção;
+integração contínua;
+manutenção futura.
