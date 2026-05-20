@@ -1,0 +1,115 @@
+20 perguntas sobre orientacao a objetos no Sistema Academico
+
+Projeto: Sistema Academico
+
+1. O que e uma classe e quais classes foram criadas neste projeto?
+R: No projeto foram criadas as classes:
+
+Pessoa
+Aluno
+Professor
+Disciplina
+SistemaAcademico
+
+2. O que e um objeto e quais objetos sao instanciados na funcao main de Sistema_academico.py?
+R: Objeto é uma instância de uma classe.
+Na função principal do sistema são instanciados objetos como:
+
+alunos;
+professores;
+disciplinas;
+sistema acadêmico.
+
+3. Qual e a responsabilidade da classe Pessoa dentro do projeto?
+R: A classe Pessoa serve como classe base para representar informações comuns entre alunos e professores, evitando repetição de código
+
+4. Por que Aluno e Professor herdam da classe Pessoa?
+R: Porque ambos possuem características em comum, a herança permite reutilizar atributos e métodos da classe Pessoa.
+
+5. Quais atributos a classe Aluno recebe diretamente da classe Pessoa?
+R: A classe Aluno herda atributos como:
+
+nome;
+CPF;
+idade;
+endereço.
+
+6. Quais atributos sao especificos da classe Aluno?
+R: Os atributos específicos da classe Aluno normalmente são:
+
+matrícula;
+curso;
+lista de disciplinas;
+histórico acadêmico.
+
+7. Quais atributos sao especificos da classe Professor?
+R: Os atributos específicos da classe Professor normalmente são:
+
+registro do professor;
+área de atuação;
+lista de disciplinas ministradas.
+
+8. Qual e a responsabilidade da classe Disciplina no sistema?
+R: A classe Disciplina representa as matérias cadastradas no sistema, armazenando:
+
+nome da disciplina;
+código;
+carga horária;
+professor responsável;
+alunos matriculados.
+
+9. Como o metodo super() e utilizado nos construtores de Aluno e Professor?
+R: O método super() é usado para chamar o construtor da classe Pessoa, reutilizando os atributos herdados.
+
+10. O que o metodo __init__ faz em cada classe do projeto?
+R: Ele inicializa os atributos dos objetos no momento em que são criados.
+
+11. O que o metodo __str__ permite fazer ao imprimir objetos como Aluno, Professor e Disciplina?
+R: permite exibir informações formatadas e legíveis do objeto quando usamos print()
+
+12. Como acontece a associacao entre um aluno e uma disciplina?
+R: A associação acontece quando o aluno é matriculado em uma disciplina através do método de matrícula
+
+13. Como acontece a associacao entre um professor e uma disciplina?
+R: A associação ocorre quando um professor é definido como responsável por uma disciplina
+
+14. Por que a classe Disciplina possui uma lista de alunos?
+R: Porque uma disciplina pode possuir vários alunos matriculados ao mesmo tempo
+
+15. Por que a classe Aluno possui uma lista de disciplinas?
+R: Porque um aluno pode estar matriculado em várias disciplinas simultaneamente
+
+16. Como o metodo matricular_aluno ajuda a manter a relacao entre aluno e disciplina?
+R: O método adiciona:
+
+- o aluno na lista da disciplina;
+- a disciplina na lista do aluno.
+
+17. Como o metodo definir_professor ajuda a manter a relacao entre professor e disciplina?
+R: O método associa um professor à disciplina e registra essa disciplina na lista de disciplinas ministradas pelo professor
+
+18. O que o metodo remover_dados da classe Aluno faz e quais atributos ele modifica?
+R: remove ou limpa informações do aluno conforme a regra de negócio definida no sistema.
+Ele pode modificar atributos como:
+
+- nome;
+- matrícula;
+- disciplinas;
+- dados pessoais.
+
+19. Qual e a responsabilidade da classe SistemaAcademico em relacao as outras classes?
+R: A classe SistemaAcademico centraliza o gerenciamento do sistema, controlando:
+
+- cadastro;
+- pesquisa;
+- matrículas;
+- relatórios;
+- integração entre alunos, professores e disciplinas.
+
+20. Como os conceitos de classe, objeto, heranca, encapsulamento e associacao aparecem no projeto?
+R:
+Classe: estruturas como Pessoa, Aluno e Disciplina.
+Objeto: instâncias criadas a partir das classes.
+Herança: Aluno e Professor herdando de Pessoa.
+Encapsulamento: métodos controlando acesso e alteração dos dados.
+Associação: relacionamento entre alunos, professores e disciplinas.
