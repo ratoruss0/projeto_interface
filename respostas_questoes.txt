@@ -3,11 +3,9 @@
 Professor: Felipe Douglas
 Projeto: Sistema Academico
 
-1. O objetivo do sistema esta claro para os usuarios finais, como secretaria, professores e alunos?
-R: Sim. O sistema possui uma proposta clara de gerenciamento acadêmico, permitindo o controle de alunos, professores, disciplinas e matrículas de maneira organizada e intuitiva.
+1- R: Sim. O sistema possui uma proposta clara de gerenciamento acadêmico, permitindo o controle de alunos, professores, disciplinas e matrículas de maneira organizada e intuitiva.
 
-2. Quais funcionalidades sao obrigatorias para considerar o sistema pronto: cadastro de alunos, professores, disciplinas, matriculas, pesquisa e relatorios?
-R:
+2- R:
 Cadastro de alunos;
 Cadastro de professores;
 Cadastro de disciplinas;
@@ -15,56 +13,38 @@ Matrículas;
 Pesquisa de registros;
 Emissão de relatórios em JSON e PDF.
 
-3. Todos os campos obrigatorios dos formularios estao validados corretamente antes de salvar no banco?
-R: Sim. O sistema realiza validações para impedir envio de formulários vazios ou incompletos antes da gravação no banco de dados.
+3- R: Sim. O sistema realiza validações para impedir envio de formulários vazios ou incompletos antes da gravação no banco de dados.
 
-4. O sistema impede cadastros duplicados de CPF, matricula de aluno, registro de professor e codigo de disciplina?
-R: Sim. Foram implementadas validações para evitar duplicidade de dados únicos, garantindo maior integridade das informações armazenadas.
+4- R: Sim. Foram implementadas validações para evitar duplicidade de dados únicos
 
-5. A pesquisa de alunos por nome funciona com nomes completos, partes do nome e diferencas entre letras maiusculas e minusculas?
-R: Sim. A pesquisa aceita nomes completos, trechos do nome e realiza buscas sem diferenciação entre letras maiúsculas e minúsculas.
+5- R: Sim. A pesquisa aceita nomes completos, trechos do nome e realiza buscas sem diferenciação entre letras maiúsculas e minúsculas.
 
-6. O fluxo de matricula impede que o mesmo aluno seja matriculado duas vezes na mesma disciplina?
-R: Sim. O sistema valida as matrículas existentes antes de cadastrar uma nova, impedindo duplicidade na mesma disciplina.
+6- R: Sim. O sistema valida as matrículas existentes antes de cadastrar uma nova, impedindo duplicidade na mesma disciplina.
 
-7. A remocao de matriculas esta funcionando conforme esperado, mantendo o historico no banco quando necessario?
-R: Sim. O processo de remoção foi implementado de forma controlada, permitindo manter consistência e histórico conforme a regra de negócio definida.
+7-  R: Sim. O processo de remoção foi implementado de forma controlada, permitindo manter consistência e histórico conforme a regra de negócio definida.
 
-8. O metodo de remover dados do aluno em Aluno.py esta coerente com a regra de negocio definida para o projeto?
-R: Sim. O método segue as regras estabelecidas, garantindo remoção adequada sem comprometer registros relacionados no sistema.
+8- R: Sim. O método segue as regras estabelecidas, garantindo remoção adequada sem comprometer registros relacionados no sistema.
 
-9. As telas de cadastro, edicao, listagem e pesquisa apresentam mensagens claras de sucesso, erro ou alerta?
-R: Sim. O sistema apresenta mensagens informativas ao usuário, facilitando o entendimento das operações realizadas.
+9- R: Sim. O sistema apresenta mensagens informativas ao usuário, facilitando o entendimento das operações realizadas.
 
-10. O layout da interface funciona bem em telas menores, como notebook, tablet e celular?
-R: Sim. A interface foi desenvolvida com responsividade básica, permitindo adaptação em diferentes tamanhos de tela.
+10- R: Sim. A interface foi desenvolvida com responsividade básica, permitindo adaptação em diferentes tamanhos de tela.
 
-11. Os relatorios em JSON e PDF mostram todos os dados necessarios para conferencia academica?
-R: Sim. Os relatórios exibem informações completas e organizadas para conferência e acompanhamento acadêmico.
+11- R: Sim. Os relatórios exibem informações completas e organizadas para conferência e acompanhamento acadêmico.
 
-12. O banco MySQL pode ser criado corretamente a partir do arquivo schema.sql em um ambiente novo?
-R: Sim. O arquivo schema.sql contém toda a estrutura necessária para criação das tabelas e configuração inicial do banco.
+12- R: Sim. O arquivo schema.sql contém toda a estrutura necessária para criação das tabelas e configuração inicial do banco.
 
-13. O modo SQLite local funciona corretamente quando o MySQL nao esta disponivel?
-R: Sim. O sistema possui suporte ao SQLite como alternativa local para execução e testes.
+13- R: Sim. O sistema possui suporte ao SQLite como alternativa local para execução e testes.
 
-14. As instrucoes do README e da documentacao permitem que outra pessoa instale e execute o projeto sem ajuda do professor?
-R:Sim. A documentação apresenta os passos necessários para instalação, configuração e execução do sistema.
+14- R:Sim. A documentação apresenta os passos necessários para instalação, configuração e execução do sistema.
 
-15. Existem testes manuais documentados para cadastro, edicao, pesquisa, matricula, remocao e relatorios?
-R: Sim. Foram realizados testes manuais cobrindo as principais funcionalidades do sistema.
+15- R: Sim. Foram realizados testes manuais cobrindo as principais funcionalidades do sistema.
 
-16. O sistema foi testado com dados validos, dados incompletos, dados duplicados e dados digitados incorretamente?
-R: Sim. O sistema passou por testes com diferentes cenários de entrada para validar seu comportamento e robustez.
+16- R: Sim. O sistema passou por testes com diferentes cenários de entrada para validar seu comportamento e robustez.
 
-17. As mensagens, nomes de campos e textos das telas estao padronizados em portugues e sem ambiguidades?
-R: Sim. Os textos da interface seguem padronização em português para facilitar o uso e entendimento do sistema.
+17- R: Sim. Os textos da interface seguem padronização em português para facilitar o uso e entendimento do sistema.
 
-18. O projeto esta protegido contra usos inadequados basicos, como envio de formularios vazios ou valores invalidos?
-R: Sim. Foram implementadas validações básicas para impedir entradas inválidas e minimizar erros operacionais.
+18- R: Sim. Foram implementadas validações básicas para impedir entradas inválidas e minimizar erros operacionais.
 
-19. O sistema possui configuracoes adequadas para uso fora do ambiente de desenvolvimento, como chave secreta e modo debug desativado?
-R: Parcialmente. O sistema já possui estrutura para configuração segura, porém recomenda-se revisar variáveis sensíveis e garantir o modo debug desativado em produção.
+19- R: Parcialmente. O sistema já possui estrutura para configuração segura, porém recomenda-se revisar variáveis sensíveis e garantir o modo debug desativado em produção.
 
-20. A equipe definiu quem ira aprovar a homologacao final e quais criterios precisam estar atendidos para liberar o uso do sistema?
-R: Sim. A homologação final ficará sob responsabilidade do professor, considerando funcionamento completo das funcionalidades obrigatórias, estabilidade e validação dos testes realizados.
+20- R: Sim. A homologação final ficará sob responsabilidade do professor, considerando funcionamento completo das funcionalidades obrigatórias, estabilidade e validação dos testes realizados.
